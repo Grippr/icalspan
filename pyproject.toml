@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "icalspan"
+version = "0.0.1"
+description = "Get events in an icalendar between specific dates"
+authors = [
+    { name="Joel Kramer", email="joelkramer713@gmail.com   " }
+]
+readme = "README.md"
+license = { file="LICENSE" }
+dependencies = [
+    "requests>=2.25.1",
+    "numpy>=2",
+    "icalendar>=6",
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent"
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
