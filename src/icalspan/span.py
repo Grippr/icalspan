@@ -40,6 +40,11 @@ def untimezone_datetime(dt, tz):
         dt = dt.replace(tzinfo=None)
     return dt
 
+def get_date(dt):
+    if type(dt) == date:
+        return dt
+    return dt.date()
+
 def get_events(cal, cal_start_date, cal_end_date, tz = None):
     """
     Get events in an iCalendar between specific dates.
@@ -119,18 +124,11 @@ def get_events(cal, cal_start_date, cal_end_date, tz = None):
 
             rrule_drr = rrulestr(rrule.to_ical().decode("utf-8"), dtstart=event_start)
 
-            print("xxx" , event)
-            print("xxx", rrule)
-            print("xxx", rrule_drr)
-            print("xxx", start, end)
-            print("xxx", event_start)
-
             for occurrence in rrule_drr.between(start, end):
-                print("XXXXXXXX,", occurrence)
-        #         if occurrence >= cal_start_date and occurrence <= cal_end_date:
-        #             event_copy = event.copy()
-        #             event_copy['dtstart'].dt = occurrence
-        #             event_copy['dtend'].dt = occurrence
-        #             event_copy["rrule"] = None
-        #             events.append(event_copy)
+                if occurrence >= cal_start_dt and occurrence <= cal_end_dt:
+                    event_copy = event.copy()
+                    event_copy['dtstart'].dt = occurrence
+                    event_copy['dtend'].dt = occurrence
+                    event_copy["rrule"] = None
+                    events.append(event_copy)
     return events
